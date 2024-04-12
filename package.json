@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "build": "tsc",
+    "start": "yarn build && http-server -p 8080 -o"
+  },
+  "dependencies": {
+    "http-server": "^14.1.1",
+    "typescript": "^5.4.5"
+  }
+}
