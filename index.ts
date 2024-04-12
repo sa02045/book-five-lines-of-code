@@ -148,16 +148,8 @@ function draw() {
 
   g.clearRect(0, 0, canvas.width, canvas.height);
 
-  // Draw map
-  for (let y = 0; y < map.length; y++) {
-    for (let x = 0; x < map[y].length; x++) {
-      colorOfTile(g, x, y);
-    }
-  }
-
-  // Draw player
-  g.fillStyle = "#ff0000";
-  g.fillRect(playerx * TILE_SIZE, playery * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+  drawMap(g);
+  drawPlayer(g);
 }
 
 function colorOfTile(g: CanvasRenderingContext2D, x: number, y: number) {
@@ -201,3 +193,16 @@ window.addEventListener("keydown", (e) => {
   else if (e.key === RIGHT_KEY || e.key === "d") inputs.push(new Right());
   else if (e.key === DOWN_KEY || e.key === "s") inputs.push(new Down());
 });
+
+function drawMap(g: CanvasRenderingContext2D) {
+  for (let y = 0; y < map.length; y++) {
+    for (let x = 0; x < map[y].length; x++) {
+      colorOfTile(g, x, y);
+    }
+  }
+}
+
+function drawPlayer(g: CanvasRenderingContext2D) {
+  g.fillStyle = "#ff0000";
+  g.fillRect(playerx * TILE_SIZE, playery * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+}
