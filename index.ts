@@ -17,12 +17,24 @@ enum Tile {
   LOCK2,
 }
 
-// 열거형에서 인터페이스로
-enum Input {
-  UP,
-  DOWN,
-  LEFT,
-  RIGHT,
+interface Input {
+  handle(): void;
+}
+
+class Right implements Input {
+  handle() {}
+}
+
+class Left implements Input {
+  handle() {}
+}
+
+class Down implements Input {
+  handle() {}
+}
+
+class Up implements Input {
+  handle() {}
 }
 
 let playerx = 1;
@@ -93,13 +105,14 @@ function moveVertical(dy: number) {
   }
 }
 
+function handleInput(input: Input) {
+  input.handle();
+}
+
 function update() {
   while (inputs.length > 0) {
     let current = inputs.pop();
-    if (current === Input.LEFT) moveHorizontal(-1);
-    else if (current === Input.RIGHT) moveHorizontal(1);
-    else if (current === Input.UP) moveVertical(-1);
-    else if (current === Input.DOWN) moveVertical(1);
+    handleInput(current);
   }
 
   for (let y = map.length - 1; y >= 0; y--) {
@@ -175,8 +188,8 @@ const RIGHT_KEY = "ArrowRight";
 const DOWN_KEY = "ArrowDown";
 
 window.addEventListener("keydown", (e) => {
-  if (e.key === LEFT_KEY || e.key === "a") inputs.push(Input.LEFT);
-  else if (e.key === UP_KEY || e.key === "w") inputs.push(Input.UP);
-  else if (e.key === RIGHT_KEY || e.key === "d") inputs.push(Input.RIGHT);
-  else if (e.key === DOWN_KEY || e.key === "s") inputs.push(Input.DOWN);
+  if (e.key === LEFT_KEY || e.key === "a") inputs.push(new Left());
+  else if (e.key === UP_KEY || e.key === "w") inputs.push(new Up());
+  else if (e.key === RIGHT_KEY || e.key === "d") inputs.push(new Right());
+  else if (e.key === DOWN_KEY || e.key === "s") inputs.push(new Down());
 });
