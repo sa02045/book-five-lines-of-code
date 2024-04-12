@@ -22,19 +22,27 @@ interface Input {
 }
 
 class Right implements Input {
-  handle() {}
+  handle() {
+    moveHorizontal(1);
+  }
 }
 
 class Left implements Input {
-  handle() {}
+  handle() {
+    moveHorizontal(-1);
+  }
 }
 
 class Down implements Input {
-  handle() {}
+  handle() {
+    moveVertical(1);
+  }
 }
 
 class Up implements Input {
-  handle() {}
+  handle() {
+    moveVertical(-1);
+  }
 }
 
 let playerx = 1;
