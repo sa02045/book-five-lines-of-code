@@ -113,14 +113,10 @@ function moveVertical(dy: number) {
   }
 }
 
-function handleInput(input: Input) {
-  input.handle();
-}
-
 function update() {
   while (inputs.length > 0) {
-    let current = inputs.pop();
-    handleInput(current);
+    let input = inputs.pop();
+    input.handle();
   }
 
   for (let y = map.length - 1; y >= 0; y--) {
